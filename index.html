@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flick | Chat Interface</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="loading"><i class="fa-regular fa-comment"></i></div>
+  <div class="container">
+    <div id="left">
+      <i id="name-icon" class="fa-solid fa-pen-to-square"></i><input type="text" id="name" value="Literature" placeholder="Edit my name here...">
+      <input type="text" id="search-message" placeholder="Search..."><div id="search"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <div id="room"></div>
+    </div>
+    <div id="right">
+      <div id="splash">
+        <div id="splash-wrapper">
+          <i id="logo" class="fa-regular fa-comment"></i>
+          <h4>Welcome to Flick!</h4>
+          <div>
+            A responsive, privacy-focused chat interface that runs entirely in your browser. No accounts, no servers, just you and your friends.
+          </div>
+        </div>
+        <div id="bottom"><i class="fa-solid fa-heart"></i> Powered by Love</div>
+      </div>
+      <div id="heading"></div>
+      <div id="chat-container" style="height: calc(100vh - 7.925em)"></div>
+      <input type="file" id="add" multiple>
+      <input type="file" id="edit">
+      <div id="editing-caption" style="display: none; bottom: 3.75em;"><span><i class="fa-solid fa-circle-xmark"></i></span>&nbsp;Editing message</div>
+      <div id="replying-caption" style="display: none; bottom: 3.75em;"><span><i class="fa-solid fa-circle-xmark"></i></span>&nbsp;Replying message</div>
+      <div id="upload-attachment-track-wrapper" style="display: none;">
+        <div id="upload-attachment-track">
+          <div id="upload-attachment" class="container-fluid hide"></div>
+        </div>
+      </div>
+      <div id="emoji-container-track-wrapper" style="display: none;">
+        <div id="emoji-container-track">
+          <div id="emoji-container" class="container-fluid hide"></div>
+        </div>
+      </div>
+      <div id="text-editor">
+        <button class="btn" id="enter"><i class="fa-regular fa-paper-plane"></i></button>
+        <div id="text-editor-container">
+          <div id="in-placeholder">Message...</div>
+          <div id="area">
+            <button class="btn" id="emoji"><i class="fa-regular fa-face-smile"></i></button>
+            <div id="editable" contenteditable="true"></div>
+            <button class="btn" id="upload"><i class="fa-solid fa-paperclip"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1137 @@
+:root {
+  --cloud: #ecf0f1;
+  --silver: #bdc3c7;
+  --concrete: #95a5a6;
+  --asbestos: #7f8c8d;
+  --placeholder: rgb(113, 118, 123);
+  --alizarin: #e74c3c;
+  --pomegranate: #c0392b;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, 'Noto Color Emoji', sans-serif;
+  overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+  z-index: 1200;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: var(--silver);
+  border-radius: 10px;
+}
+
+#editable[contenteditable=true] {
+  outline: 0 solid transparent;
+}
+
+.btn {
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
+}
+
+.btn:hover {
+  background-color: transparent;
+  border-color: black;
+  color: black;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  transition:
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  grid-template-columns: 375px auto;
+  height: 100vh;
+  transition: 
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+/* start of left */
+
+.container #left {
+  display: block;
+  background-color: var(--cloud);
+  border-right: 1px solid var(--silver);
+  padding: .5em;
+}
+
+.container #left #name-icon {
+  padding-left: .75em;
+}
+
+.container #left input#name {
+  font-size: 1em;
+  background-color: transparent;
+  border: 0 solid transparent;
+  width: calc(100% - 3.25em);
+  margin-top: .5em;
+  margin-left: .25em;
+  margin-bottom: .5em;
+}
+
+.container #left input:focus {
+  outline: none;
+}
+
+.container #search-message {
+  display: inline-block;
+  font-size: 1em;
+  margin-top: .5em;
+  margin-left: .75em;
+  margin-right: .75em;
+  border-radius: 1em;
+  padding: .5em 1em;
+  padding-right: 1.25em;
+  border: 0 solid transparent;
+  background-color: #fff;
+  width: calc(100% - 4em);
+}
+
+.container #search {
+  display: inline-block;
+  position: absolute;
+  transform: translate(-2.5em, .95em)
+}
+
+.container #room {
+  margin-top: 1em;
+}
+
+.container #room > div {
+  display: grid;
+  grid-template-columns: 50px auto;
+  gap: 10px;
+  padding: .5em 1em;
+  border-radius: 10px;
+  cursor: default;
+  transition: background-color cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #room > div:hover {
+  background-color: var(--silver);
+}
+
+.container #room > div.active {
+  background-color: var(--silver);
+}
+
+.container #room > div.active:hover {
+  background-color: var(--concrete);
+}
+
+.container #room > div > div[left] {
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+  border-radius: 25px;
+}
+
+.container #room > div > div[right] {
+  overflow: hidden;
+}
+
+.container #room > div > div[right] > div[row] {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  margin-top: .3em;
+}
+
+.container #room > div > div[right] > div[row] > div[name] {
+  font-weight: bold;
+}
+
+.container #room > div > div[right] > div[row] > div[time] {
+  text-align: right;
+}
+
+.container #room > div > div[right] > div[preview] {
+  margin-top: .2em;
+  white-space: nowrap;
+}
+
+/* end of left */
+
+.container #separator {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  background-color: var(--silver);
+}
+
+/* start of right */
+
+.container #right {
+  position: relative;
+}
+
+.container #splash {
+  position: absolute;
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  transition:
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #splash #splash-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 25em;
+}
+
+.container #splash i#logo {
+  font-size: 8rem;
+  color: var(--concrete);
+}
+
+.container #splash #splash-wrapper div {
+  color: var(--asbestos);
+}
+
+.container #bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--asbestos);
+  bottom: 1em;
+}
+
+.container #heading {
+  background-color: var(--cloud);
+  height: 50px;
+  padding: .5em 1em;
+  cursor: default;
+}
+
+.container #heading > div[avatar] {
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+  border-radius: 25px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.container #heading > div[name] {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(-20px);
+  font-weight: bold;
+}
+
+.container #chat-container {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 1em;
+  padding-top: .5em;
+  padding-bottom: 1.5em;
+  padding-right: 0;
+  overflow-y: auto;
+  transition: height cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container::-webkit-scrollbar-track-piece:end {
+  margin-bottom: 1.5em;
+}
+
+.container #chat-container > div {
+  margin-bottom: .5em;
+}
+
+.container #chat-container > div,
+div#preview-delete-chat {
+  display: grid;
+  grid-template-columns: 50px auto;
+  gap: 5px;
+}
+
+.container #chat-container > div > div[avatar] > img,
+div#preview-delete-chat > div[avatar] > img {
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+  border-radius: 25px;
+}
+
+/* start of reply */
+
+.container #chat-container > div > div > div[chat] > div[reply-id] {
+  margin-left: .25em;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[reply-line] {
+  display: inline-block;
+  height: .3em;
+  width: 1em;
+  border-top-left-radius: 5px;
+  border-left: 2px solid var(--silver);
+  border-top: 2px solid var(--silver);
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[replying-avatar] {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  background-size: contain;
+  border-radius: .5em;
+  margin-left: .25em;
+  vertical-align: middle;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[replying-avatar] > img {
+  height: 1em;
+  width: 1em;
+  border-radius: .5em;
+  object-fit: cover;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[replying-name] {
+  display: inline-block;
+  font-weight: bold;
+  margin-left: .25em;
+  margin-right: .25em;
+  vertical-align: middle;
+  cursor: default;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[inner-reply-id] {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: default;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[edited-flag] {
+  display: inline-block;
+  font-size: .75em;
+  color: var(--placeholder);
+  margin-left: .25em;
+  vertical-align: middle;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id] > div[inner-reply-id] > i {
+  color: var(--asbestos);
+  margin-left: .25em;
+}
+
+.container #chat-container > div > div > div[chat] > div[reply-id]:hover > div[reply-line] {
+  border-color: var(--concrete);
+}
+
+/* end of reply */
+
+.container #chat-container > div > div > div[name],
+div#preview-delete-chat > div > div[name] {
+  font-weight: bold;
+  margin-left: .25em;
+  margin-right: .25em;
+}
+
+.container #chat-container > div > div > div[time],
+div#preview-delete-chat > div > div[time] {
+  color: var(--placeholder);
+}
+
+.container #chat-container > div > div > div[name],
+.container #chat-container > div > div > div[time],
+div#preview-delete-chat > div > div[name],
+div#preview-delete-chat > div > div[time] {
+  display: inline-block;
+}
+
+.container #chat-container > div > div > div[chat],
+div#preview-delete-chat > div > div[chat] {
+  position: relative;
+  transition: background-color cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container > div > div > div[chat]:hover,
+.container #chat-container > div > div > div[chat].editing,
+.container #chat-container > div > div > div[chat].replying,
+.container #chat-container > div > div > div[chat].highlighted {
+  background-color: var(--cloud);
+}
+
+.container #chat-container > div > div > div[chat] > div[options] {
+  position: absolute;
+  top: -2em;
+  right: 1em;
+  background-color: var(--cloud);
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: .5em 0;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container > div > div > div[chat]:hover:not(.editing) > div[options] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.container #chat-container > div > div > div[chat] > div[options] > span {
+  color: var(--asbestos);
+  padding: .5em;
+  transition: background-color cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container > div > div > div[chat] > div[options] > span[delete-chat] {
+  color: var(--alizarin);
+}
+
+.container #chat-container > div > div > div[chat] > div[options] > span:hover {
+  background-color: var(--silver);
+}
+
+.container #chat-container > div > div > div[chat] > div[edited] {
+  font-size: .75em;
+  margin: .25em;
+  color: var(--placeholder);
+}
+
+.container #chat-container > div > div > div[chat] > div[text],
+.container #chat-container > div > div > div[chat] > div[content],
+div#preview-delete-chat > div > div[chat] > div[text],
+div#preview-delete-chat > div > div[chat] > div[content] {
+  margin: .25em;
+}
+
+.container #chat-container > div > div > div[chat] > div[content],
+div#preview-delete-chat > div > div[chat] > div[content] {
+  position: relative;
+  background-color: var(--cloud);
+  border: 1px solid var(--silver);
+  border-radius: 15px;
+  max-height: 25em;
+  max-width: 25em;
+  line-height: 0;
+  margin-bottom: .5em;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container > div > div > div[chat] > div[content]:not(:has(> div[audio-wrapper])),
+div#preview-delete-chat > div > div[chat] > div[content]:not(:has(> div[audio-wrapper])) {
+  overflow: hidden;
+}
+
+.container #chat-container > div > div > div[chat] > div[content]:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.container #chat-container > div > div > div[chat] > div[content] img,
+.container #chat-container > div > div > div[chat] > div[content] video,
+.container #chat-container > div > div > div[chat] > div[content] > div[audio-wrapper],
+.container #chat-container > div > div > div[chat] > div[content] > div[video-wrapper],
+div#preview-delete-chat > div > div[chat] > div[content] img,
+div#preview-delete-chat > div > div[chat] > div[content] video,
+div#preview-delete-chat > div > div[chat] > div[content] > div[audio-wrapper],
+div#preview-delete-chat > div > div[chat] > div[content] > div[video-wrapper] {
+  border-radius: 15px;
+  max-height: 25em;
+  max-width: 25em;
+}
+
+/* start of audio and video properties */
+.container #chat-container > div > div > div[chat] > div[content] > div[audio-wrapper],
+.container #chat-container > div > div > div[chat] > div[content] > div[video-wrapper] {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > div[video-wrapper]:focus {
+  outline: none;
+}
+
+div[audio-wrapper] > div[control-panel] {
+  display: grid;
+  grid-template-columns: 32px 100px auto 32px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  background-color: var(--cloud);
+  border-radius: 15px;
+}
+
+div[video-wrapper] > div[control-panel] {
+  display: grid;
+  grid-template-columns: 32px 100px auto 32px 32px;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: -32px;
+  color: #fff;
+  background-color: rgba(113, 118, 123, .2);
+  transition: bottom cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+div[video-wrapper]:hover > div[control-panel] {
+  bottom: -32px;
+}
+
+div[video-wrapper]:hover > div[control-panel].everplayed {
+  bottom: 0;
+}
+
+div[audio-wrapper] > div[control-panel] > play,
+div[video-wrapper] > div[control-panel] > play {
+  padding: .5em 10px;
+}
+
+div[audio-wrapper] > div[control-panel] > volume,
+div[video-wrapper] > div[control-panel] > volume {
+  position: relative;
+  height: 32px;
+  width: 32px;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > i,
+div[video-wrapper] > div[control-panel] > volume > i {
+  padding: .5em 6px;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input,
+div[video-wrapper] > div[control-panel] > volume > input {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  height: 5px;
+  width: 100px;
+  transform: rotate(-90deg) translateY(-50%);
+  transform-origin: 0 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--silver);
+  outline: none;
+  border-radius: 2.5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .5s .5s;
+  z-index: 10;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input {
+  box-shadow: 0 0 0 5px rgba(189, 195, 199, .2);
+}
+
+div[video-wrapper] > div[control-panel] > volume > input {
+  box-shadow: 0 0 0 5px rgba(113, 118, 123, .2);
+}
+
+
+div[video-wrapper] > div[control-panel] > fullscreen {
+  padding: .5em 9px;
+}
+
+div[audio-wrapper] > div[control-panel] > play,
+div[audio-wrapper] > div[control-panel] > volume > i,
+div[video-wrapper] > div[control-panel] > play,
+div[video-wrapper] > div[control-panel] > volume > i,
+div[video-wrapper] > div[control-panel] > fullscreen {
+  opacity: .8;
+}
+
+div[audio-wrapper] > div[control-panel] > play:hover,
+div[audio-wrapper] > div[control-panel] > volume > i:hover,
+div[video-wrapper] > div[control-panel] > play:hover,
+div[video-wrapper] > div[control-panel] > volume > i:hover,
+div[video-wrapper] > div[control-panel] > fullscreen:hover {
+  opacity: 1;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > i:hover + input,
+div[audio-wrapper] > div[control-panel] > volume > input:hover,
+div[video-wrapper] > div[control-panel] > volume > i:hover + input,
+div[video-wrapper] > div[control-panel] > volume > input:hover {
+  top: -10px;
+  opacity: 1;
+  visibility: visible;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+div[audio-wrapper] > div[control-panel] > span,
+div[video-wrapper] > div[control-panel] > span {
+  margin-top: 1px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+div[audio-wrapper] > div[control-panel] > input,
+div[video-wrapper] > div[control-panel] > input {
+  height: 5px;
+  width: calc(100% - 10px);
+  margin: 0 5px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff;
+  outline: none;
+  border-radius: 2.5px;
+}
+
+div[audio-wrapper] > div[control-panel] > input:after {
+  content: '';
+  position: absolute;
+  transform: translateX(1px);
+  width: calc(100% - 173px);
+  height: 32px;
+}
+
+div[video-wrapper] > div[control-panel] > input:after {
+  content: '';
+  position: absolute;
+  transform: translateX(1px);
+  width: calc(100% - 205px);
+  height: 32px;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input::-webkit-slider-thumb,
+div[audio-wrapper] > div[control-panel] > input::-webkit-slider-thumb,
+div[video-wrapper] > div[control-panel] > volume > input::-webkit-slider-thumb,
+div[video-wrapper] > div[control-panel] > input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  background: var(--placeholder);
+  border-radius: 50%;
+  transition:
+    width cubic-bezier(0.075, 0.82, 0.165, 1) .2s,
+    height cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input::-moz-range-thumb,
+div[audio-wrapper] > div[control-panel] > input::-moz-range-thumb,
+div[video-wrapper] > div[control-panel] > volume > input::-moz-range-thumb,
+div[video-wrapper] > div[control-panel] > input::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  background: var(--placeholder);
+  border-radius: 50%;
+  transition:
+    width cubic-bezier(0.075, 0.82, 0.165, 1) .2s,
+    height cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input::-webkit-slider-thumb,
+div[audio-wrapper] > div[control-panel] > input:hover::-webkit-slider-thumb,
+div[video-wrapper] > div[control-panel] > volume > input::-webkit-slider-thumb,
+div[video-wrapper] > div[control-panel] > input:hover::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+}
+
+div[audio-wrapper] > div[control-panel] > volume > input::-moz-range-thumb,
+div[audio-wrapper] > div[control-panel] > input:hover::-moz-range-thumb,
+div[video-wrapper] > div[control-panel] > volume > input::-moz-range-thumb,
+div[video-wrapper] > div[control-panel] > input:hover::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+}
+
+div[video-wrapper] > div[play] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  background-color: var(--placeholder);
+  color: #fff;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 1.125em;
+  opacity: .8;
+  visibility: visible;
+  transition:
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+div[video-wrapper]:hover > div[play] {
+  opacity: .95;
+  visibility: visible;
+}
+
+div[video-wrapper] > div.played[play],
+div[video-wrapper] > div.full[play] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+div[video-wrapper] > div[play] > i {
+  margin-left: .1em;
+}
+
+div[video-wrapper] > video {
+  transition: filter cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+div[video-wrapper] > video.ended {
+  filter: brightness(0.8);
+}
+
+/* end of video properties */
+
+.container #chat-container > div > div > div[chat] > div[content] > img {
+  transition:
+    filter cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    border-radius cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    transform cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    top cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    left cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    max-height cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    max-width cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > img:hover {
+  filter: brightness(0.8);
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > img.view:hover {
+  filter: brightness(1);
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > i,
+div#preview-delete-chat > div > div[chat] > div[content] > i {
+  padding: 0.5em;
+  font-size: 2.5em;
+  color: var(--asbestos);
+  padding-right: 10em;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > span.blob,
+div#preview-delete-chat > div > div[chat] > div[content] > span.blob {
+  display: none;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > span.desc,
+div#preview-delete-chat > div > div[chat] > div[content] > span.desc {
+  position: absolute;
+  cursor: default;
+  top: 1.2em;
+  left: 4.3em;
+  width: calc(100% - 8.6em);
+  line-height: 1.2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > span.size,
+div#preview-delete-chat > div > div[chat] > div[content] > span.size {
+  position: absolute;
+  cursor: default;
+  top: 3.1em;
+  left: 4.3em;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > span.download,
+div#preview-delete-chat > div > div[chat] > div[content] > span.download {
+  position: absolute;
+  top: 1.5em;
+  right: 1em;
+}
+
+.container #chat-container > div > div > div[chat] > div[content] > span.download > i,
+div#preview-delete-chat > div > div[chat] > div[content] > span.download > i {
+  font-size: 2em;
+  color: var(--asbestos);
+}
+
+.container #text-editor {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.container #text-editor-container {
+  position: relative;
+  margin: .5em 1em;
+  background-color: var(--cloud);
+  border-radius: 25px;
+  width: calc(100% - 2em);
+  transition: width cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+.container #text-editor-container.send {
+  width: calc(100% - 2.5em - 40px);
+}
+
+.container #in-placeholder {
+  position: absolute;
+  top: 0;
+  color: var(--placeholder);
+  margin: .8em calc(1.5em + 20px);
+}
+
+.container #area {
+  display: grid;
+  grid-template-columns: 40px auto 40px;
+  padding: .1em;
+}
+
+.container #editable {
+  max-height: 10em;
+  overflow-y: auto;
+  padding: .7em .2em;
+}
+
+.container #emoji, .container #upload, .container #enter {
+  border-radius: 20px;
+  background-color: transparent;
+  transition: none;
+  color: var(--placeholder);
+  font-size: 1.2em;
+  border-color: transparent;
+  transition: background-color cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+  height: 40px;
+  width: 40px;
+}
+
+.container #emoji:hover, .container #upload:hover, .container #enter:hover {
+  background-color: var(--silver);
+}
+
+.container #emoji:focus, .container #upload:focus, .container #enter:focus {
+  box-shadow: none;
+}
+
+.container #enter {
+  border-radius: 25px;
+  height: calc(40px + .2em);
+  width: calc(40px + .2em);
+  position: absolute;
+  top: .45em;
+  right: .85em;
+  background-color: var(--cloud);
+}
+
+img.emoji {
+  height: 1.2em;
+  width: 1.2em;
+  padding: .1em;
+}
+
+#emoji-container-track-wrapper {
+  position: absolute;
+  left: 1em;
+  bottom: 1.75em;
+  overflow: hidden;
+}
+
+#emoji-container-track {
+  position: relative;
+  width: 26em;
+  height: 28.5em;
+}
+
+#emoji-container {
+  background-color: var(--cloud);
+  border-radius: 5px;
+  padding: 10px;
+  height: 25em;
+  width: calc(100% - 20px);
+  overflow: auto;
+  color: black;
+  position: absolute;
+  translate: 0 0;
+  transition:
+    visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+    translate cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+@media only screen and (max-height: 30.25em) {
+  #emoji-container-track {
+    height: calc(100vh - 1.75em);
+  }
+
+  #emoji-container {
+    height: calc(100vh - 5.25em);
+  }
+}
+
+#emoji-container #search-emoji {
+  display: inline-block;
+  font-size: 1em;
+  border-radius: 1em;
+  padding: .5em 1em;
+  padding-right: 1.25em;
+  border: 0 solid transparent;
+  background-color: #fff;
+  width: calc(100% - 3.5em);
+  outline: none;
+}
+
+#emoji-container #search-e {
+  display: inline-block;
+  position: absolute;
+  transform: translate(-1.75em, .45em);
+}
+
+#emoji-container #emoji-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 10px;
+}
+
+#emoji-container #emoji-list.searching {
+  grid-template-columns: 1fr;
+}
+
+#emoji-container #emoji-list #emoji-left {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+#emoji-container #emoji-list.searching #emoji-left {
+  display: none;
+}
+
+#emoji-container #emoji-list #emoji-left div,
+#emoji-container #emoji-list #emoji-right div {
+  font-size: 32px;
+  margin: 2px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  user-select: none;
+}
+
+#emoji-container #emoji-list #emoji-left div:hover,
+#emoji-container #emoji-list #emoji-right div:hover {
+  background-color: var(--silver);
+}
+
+#emoji-container #emoji-list #emoji-left div.active {
+  background-color: var(--silver);
+}
+
+#emoji-container #emoji-list #emoji-left div.active:hover {
+  background-color: var(--concrete);
+}
+
+#emoji-container #emoji-list #emoji-right {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 2.8em);
+}
+
+#emoji-container.hide {
+  translate: 0 28.5em;
+  opacity: 0;
+  visibility: hidden;
+}
+
+input#add,
+input#edit {
+  display: none;
+}
+
+#editing-caption,
+#replying-caption {
+  position: absolute;
+  background-color: var(--cloud);
+  border-radius: 25px;
+  margin: 0 1em;
+  padding: .5em 1em;
+  width: calc(100% - 4em);
+  cursor: default;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+#editing-caption.hide,
+#replying-caption.hide {
+  translate: 0 2em;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#editing-caption > span,
+#replying-caption > span {
+  padding-right: 5px;
+}
+
+#editing-caption > span:hover,
+#replying-caption > span:hover {
+  color: var(--alizarin);
+}
+
+#upload-attachment-track-wrapper {
+  position: absolute;
+  margin: 0 1em;
+  bottom: 1.75em;
+  width: calc(100% - 2em);
+  overflow: hidden;
+}
+
+#upload-attachment-track {
+  position: relative;
+  width: 100%;
+  height: 9em;
+}
+
+#upload-attachment {
+  background-color: var(--cloud);
+  border-radius: 25px;
+  padding: .5em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  position: absolute;
+  width: calc(100% - 1em);
+  height: calc(100% - 3em);
+  translate: 0 0;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+#upload-attachment::-webkit-scrollbar-button:start:decrement,
+#upload-attachment::-webkit-scrollbar-button:end:increment {
+  width: 12.5px;
+}
+
+#upload-attachment > div {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  background-color: var(--concrete);
+  height: 6em;
+  width: 6em;
+  border-radius: 15px;
+  margin-right: .5em;
+  overflow: hidden;
+}
+
+#upload-attachment img {
+  max-height: 6em;
+  max-width: 6em;
+  object-fit: contain;
+}
+
+#upload-attachment video {
+  max-height: 6em;
+  max-width: 6em;
+}
+
+#upload-attachment > div > i {
+  position: absolute;
+  font-size: 2em;
+  top: 1.2rem;
+}
+
+#upload-attachment .type {
+  display: none;
+}
+
+#upload-attachment .desc {
+  position: absolute;
+  bottom: 1em;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 13em;
+}
+
+#upload-attachment .blob,
+#upload-attachment .size,
+#upload-attachment .download {
+  display: none;
+}
+
+#upload-attachment .edit {
+  position: absolute;
+  left: 0;
+  font-size: 1em;
+  background-color: var(--cloud);
+  height: 100%;
+  width: 50%;
+  opacity: 0;
+  transition: opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+#upload-attachment .edit i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#upload-attachment .delete {
+  position: absolute;
+  left: 50%;
+  font-size: 1em;
+  background-color: var(--cloud);
+  height: 100%;
+  width: 50%;
+  opacity: 0;
+  transition: opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+}
+
+#upload-attachment .delete i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#upload-attachment .edit:hover,
+#upload-attachment .delete:hover {
+  opacity: .5;
+}
+
+#upload-attachment.hide {
+  translate: 0 15em;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#preview-delete-chat {
+  overflow: auto;
+  min-height: 50px;
+  max-height: 200px;
+}
+
+/* end of right */
