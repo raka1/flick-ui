@@ -198,12 +198,6 @@ html, body {
 
 /* start of right */
 
-/* @media only screen and (max-width: 768px) {
-  .container #right #splash {
-    display: none;
-  }
-} */
-
 .container #right {
   position: relative;
   height: 100vh;
