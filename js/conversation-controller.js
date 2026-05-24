@@ -29,8 +29,45 @@ export const formatChats = (element, id) => {
   const containerRight = document.getElementById('right')
 
   if (containerRight.classList.contains('sm-hide')) {
+    const divLeft = document.createElement('div')
+    const divRight = document.createElement('div')
+
+    divLeft.style.position = 'absolute'
+    divLeft.style.top = '0'
+    divLeft.style.left = '0'
+    divLeft.style.height = '100%'
+    divLeft.style.width = '100%'
+    containerLeft.appendChild(divLeft)
+
+    divRight.style.position = 'absolute'
+    divRight.style.top = '0'
+    divRight.style.left = '0'
+    divRight.style.height = '100%'
+    divRight.style.width = '100%'
+    containerRight.appendChild(divRight)
+
     containerRight.classList.remove('sm-hide')
-    containerLeft.classList.add('sm-hide')
+
+    containerRight.style.transform = 'translateX(100%)'
+    containerRight.style.position = 'absolute'
+    containerRight.style.top = '0'
+    containerRight.style.width = '100%'
+
+    requestAnimationFrame(() => {
+      containerRight.style.transform = 'translateX(0)'
+      containerLeft.style.transform = 'translateX(-50%)'
+    })
+
+    containerRight.addEventListener('transitionend', () => {
+      containerLeft.classList.add('sm-hide')
+      containerLeft.style.transform = ''
+      containerRight.style.transform = ''
+      containerRight.style.position = ''
+      containerRight.style.top = ''
+      containerRight.style.width = ''
+      divLeft.remove()
+      divRight.remove()
+    }, { once: true })
   }
 
   if (getEditingChat() || getReplyingChat()) {
@@ -122,12 +159,49 @@ export const formatChats = (element, id) => {
 export const unformatChats = () => {
   const containerLeft = document.getElementById('left')
   const containerRight = document.getElementById('right')
+  const rooms = document.querySelectorAll('#room > div')
+
+  rooms.forEach(room => room.classList.remove('active'))
+
+  const divLeft = document.createElement('div')
+  const divRight = document.createElement('div')
+
+  divLeft.style.position = 'absolute'
+  divLeft.style.top = '0'
+  divLeft.style.left = '0'
+  divLeft.style.height = '100%'
+  divLeft.style.width = '100%'
+  containerLeft.appendChild(divLeft)
+
+  divRight.style.position = 'absolute'
+  divRight.style.top = '0'
+  divRight.style.left = '0'
+  divRight.style.height = '100%'
+  divRight.style.width = '100%'
+  containerRight.appendChild(divRight)
 
   containerLeft.classList.remove('sm-hide')
-  containerRight.classList.add('sm-hide')
-  
-  const rooms = document.querySelectorAll('#room > div')
-  rooms.forEach(room => room.classList.remove('active'))
+
+  containerLeft.style.transform = 'translateX(-50%)'
+  containerRight.style.position = 'absolute'
+  containerRight.style.top = '0'
+  containerRight.style.width = '100%'
+
+  requestAnimationFrame(() => {
+    containerRight.style.transform = 'translateX(100%)'
+    containerLeft.style.transform = 'translateX(0)'
+  })
+
+  containerRight.addEventListener('transitionend', () => {
+    containerRight.classList.add('sm-hide')
+    containerLeft.style.transform = ''
+    containerRight.style.transform = ''
+    containerRight.style.position = ''
+    containerRight.style.top = ''
+    containerRight.style.width = ''
+    divLeft.remove()
+    divRight.remove()
+  }, { once: true })
 }
 
 export const createContentElement = (content, chatDiv) => {

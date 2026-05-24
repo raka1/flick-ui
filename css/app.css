@@ -77,6 +77,14 @@ html, body {
   .container {
     grid-template-columns: 100%;
   }
+
+  .container #left,
+  .container #right {
+    transition: 
+      transform cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+      opacity cubic-bezier(0.075, 0.82, 0.165, 1) .5s,
+      visibility cubic-bezier(0.075, 0.82, 0.165, 1) .5s;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -202,6 +210,7 @@ html, body {
   position: relative;
   height: 100vh;
   height: 100dvh;
+  background-color: #fff;
 }
 
 .container #splash {
