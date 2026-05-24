@@ -84,4 +84,9 @@ export const shiftUp = (element) => {
 
     room.prepend(element)
   }, { once: true })
+
+  const containerLeft = document.getElementById('left')
+
+  if (containerLeft.classList.contains('sm-hide'))
+    room.prepend(element)
 }
